@@ -12,7 +12,7 @@ function NavItem({ navKey }) {
   return (
     <Link
       className={pathname === path ? activeLink : inactiveLink}
-      href={`/${path}`}
+      href={path}
       key={name}
     >
       {svg}
