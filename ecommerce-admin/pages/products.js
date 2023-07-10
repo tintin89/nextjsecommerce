@@ -1,10 +1,13 @@
 import Layout from '@/components/Layout';
+import Link from 'next/link';
 import React from 'react'
 
 function Products() {
   return (
     <Layout>
-        products page here
+        <Link href={'/products/new'} className='bg-blue-900 text-white rounded-md py-1 px-2'>
+        Add new product
+        </Link>
     </Layout>
   )
 }
