@@ -11,7 +11,7 @@ function NavItem({ navKey }) {
 
   return (
     <Link
-      className={pathname === path ? activeLink : inactiveLink}
+      className={(pathname === path || pathname.includes(name.toLowerCase())) ? activeLink : inactiveLink}
       href={path}
       key={name}
     >
