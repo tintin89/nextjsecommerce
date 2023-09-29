@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+img{
+    max-height:100%;
+}
 input, textarea{
     outline:none;
     @apply border border-gray-300 rounded-md px-1 w-full;

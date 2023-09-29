@@ -8,17 +8,18 @@ function ProductForm({
   name: existingName,
   description: existingDescription,
   price: existingPrice,
-  images,
+  images:existingImages,
 }) {
   const [name, Setname] = useState(existingName || "");
   const [description, Setdescription] = useState(existingDescription || "");
   const [price, Setprice] = useState(existingPrice || 0);
+  const [images,setImages] = useState(existingImages || []);
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
 
   async function createProduct(e) {
     e.preventDefault();
-    const data = { name, description, price };
+    const data = { name, description, price, images };
     if (_id) {
       //update
       await axios.put("/api/products", { ...data, _id });
@@ -41,7 +42,11 @@ function ProductForm({
         data.append('file',file);
       }      
       const res = await axios.post('/api/upload',data);
+      setImages(oldImages=>{
+        return [...oldImages, ...res.data.links];
+      })
     }
+
 
   }
   return (
@@ -54,7 +59,12 @@ function ProductForm({
         onChange={(e) => Setname(e.target.value)}
       />
       <label>Photos</label>
-      <div className="mb-2">
+      <div className="mb-2 flex flex-wrap gap-2">
+        {!!images?.length && images.map(link=>(
+          <div key={link} className="h-24">
+            <img src={link} alt="" className="rounded-lg"/>
+          </div>
+        ))}
         <label className="w-24 h-24 cursor-pointer text-center flex  items-center justify-center text-sm gap-1 text-gray-500 rounded-lg bg-gray-200">
           <svg
             xmlns="http://www.w3.org/2000/svg"
