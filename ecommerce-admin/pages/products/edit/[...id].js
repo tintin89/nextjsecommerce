@@ -9,8 +9,7 @@ function EditProductPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    console.log("me hice render");
+  useEffect(() => {    
     if (!id) return;
     axios.get("/api/products?id=" + id).then((response) => {
       setProductInfo(response.data);
